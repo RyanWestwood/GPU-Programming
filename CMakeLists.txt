@@ -6,6 +6,10 @@ set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DLOGGING")
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -DLOGGING")
 
+find_package(OpenCL REQUIRED PATHS ${PROJECT_SOURCE_DIR}/library_binaries)
+include_directories(${OpenCL_INCLUDE_DIRS})
+
 file(GLOB_RECURSE SOURCE "src/*.*")
 
 add_executable (GPU_Programming ${SOURCE})
+target_link_libraries(GPU_Programming OpenCL::OpenCL)
